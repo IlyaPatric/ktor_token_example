@@ -17,7 +17,7 @@ class LoginController(private val call: ApplicationCall) {
             call.respond(HttpStatusCode.BadRequest, "User not found")
         } else {
             if (userDTO.password == user.password) {
-                val token = UUID.randomUUID().toString()
+                //val token = UUID.randomUUID().toString()
                 call.respond(LoginResponse(userDTO.token))
             } else {
                 call.respond(HttpStatusCode.BadRequest, "Invalid password")

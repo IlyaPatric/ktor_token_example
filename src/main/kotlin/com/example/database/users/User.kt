@@ -36,4 +36,19 @@ object User: Table("users") {
             null
         }
     }
+
+    fun selectUserByToken(token: String): UserDTO? {
+        return try {
+            transaction {
+                val user = User.select { User.token.eq(token) }.single()
+                UserDTO(
+                    login = user[login],
+                    password = user[password],
+                    token = user[User.token]
+                )
+            }
+        } catch (e: Exception) {
+            null
+        }
+    }
 }
